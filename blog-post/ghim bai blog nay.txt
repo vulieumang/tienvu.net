@@ -1,0 +1,2 @@
+Lấy mật khẩu ứng dụng của gmail để gửi email trên website
+vào link  và bật xác thực 2 bước, thêm số điện thoại và email khôi phục https://myaccount.google.com/security sau đó vào: https://myaccount.google.com/apppasswords chọn mục khác  trong phần ứng dụng và ấn TẠO mật khẩu là 16 ký tự hiện ra

@@ -1,0 +1,16 @@
+Đặt mật khẩu ngắn trên MACOS
+
+đôi lúc chung ta đặt mật khẩu dài trên máy tính, nhưng theo mình cứ mỗi lần gỏ như vậy tốn thêm mấy giây cuộc đời rất lãng phí, tính ra 1 năm nếu mà để mật khẩu dài có khi mất cả mấy tiếng, rất uổng, trên windows thì đặt mật khẩu ngắn rất đơn giản, trên mac thì cần gỏ câu lệnh này vào terminal (có thể cần gỏ )
+
+pwpolicy -clearaccountpolicies
+
+
+nếu có thông báo yêu cầu quyền admin thì gỏ: sudo su sau đó nhập mật khẩu hiện tại, sau đó gỏ dòng lệnh trên vào terminal và nhập mật khẩu cũ 1 lần nữa để cài đặt, trong lúc nhập mật khẩu thì trên terminal ko hiển thị gì cả, cứ nhập vô rồi enter.
+
+rồi để đổi mật khẩu thì vào cài đặt  – user – chọn user và bấm change pass
+
+
+
+có thể thử video này, nếu bạn ko thấy giống giao diện thì có thể tìm phiên bản máy mac của mình + từ khoá change password
+
+

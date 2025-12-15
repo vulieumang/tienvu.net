@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt mật khẩu ngắn trên MACOS - TienVu.net</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="liquid-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="glass-overlay"></div>
+    </div>
+
+    <header class="glass-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">TienVu.net</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Trang chủ</a></li>
+                    <li><a href="../../index.html" class="active">Blog</a></li>
+                    <li><a href="../../dich-vu.html">Dịch vụ</a></li>
+                    <li><a href="../../index.html#contact">Liên hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="blog-detail-section">
+            <div class="container">
+                <article class="glass-panel blog-content">
+                    <a href="../../index.html" class="read-more" style="margin-bottom: 1rem; display: inline-flex;"><i
+                            class="fas fa-arrow-left"></i> Quay lại Trang chủ</a>
+                    <h1>Đặt mật khẩu ngắn trên MACOS</h1>
+                    <span class="blog-meta"><i class="far fa-calendar-alt"></i> 15/12/2025 | <i class="fas fa-tag"></i>
+                        MacOS Tips</span>
+
+                    <div class="blog-body">
+                        <p>Đôi lúc chúng ta muốn đặt mật khẩu ngắn (1 ký tự chẳng hạn) trên máy tính để mở khóa cho
+                            nhanh, nhưng macOS thường yêu cầu mật khẩu phức tạp. Việc gõ password dài mỗi ngày tốn rất
+                            nhiều thời gian.</p>
+
+                        <h2>Hướng dẫn thực hiện</h2>
+                        <p>Mở <strong>Terminal</strong> và nhập câu lệnh sau:</p>
+
+                        <pre><code class="language-bash">pwpolicy -clearaccountpolicies</code></pre>
+
+                        <p>Nếu hệ thống yêu cầu quyền admin, bạn có thể cần nhập:</p>
+                        <pre><code class="language-bash">sudo pwpolicy -clearaccountpolicies</code></pre>
+
+                        <p>Sau đó nhập mật khẩu hiện tại của bạn. Lưu ý khi nhập password trên Terminal sẽ không hiện ký
+                            tự nào, cứ nhập đúng rồi Enter.</p>
+
+                        <h2>Đổi mật khẩu</h2>
+                        <p>Sau khi chạy lệnh trên, bạn vào <strong>System Settings > Users & Groups</strong>, chọn user
+                            của mình và bấm <strong>Change Password</strong>. Lúc này bạn có thể đặt mật khẩu ngắn tùy
+                            thích (thậm chí 1 ký tự space).</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="glass-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="contact-info">
+                    <h3>Đinh Tiến Vũ</h3>
+                    <p>Web Developer & Designer</p>
+                    <div class="social-links">
+                        <a href="https://zalo.me/0906386941" target="_blank" class="social-icon"><i
+                                class="fas fa-comment"></i></a>
+                        <a href="https://t.me/tamydung" target="_blank" class="social-icon"><i
+                                class="fab fa-telegram-plane"></i></a>
+                        <a href="tel:0906386941" class="social-icon"><i class="fas fa-phone-alt"></i></a>
+                    </div>
+                </div>
+                <div class="copyright">&copy; 2024 TienVu.net. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+    <script src="../../assets/js/blog.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+Cách cài đặt file .msix | how to install .msix file on Windows 10 LTSC
+
+
+Chạy lệnh Powershell dạng sau (thay đường dẫn hoặc file vào):
+
+Add-AppxPackage ‘https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx’
+
+Add-AppxPackage -Path “https://tvd-packages.tradingview.com/stable/latest/win32/TradingView.msix“
+
+giải thích bên dưới:
+
+ 
+
+Một số máy Windows 10 LTSC sẽ ko có Windows store nên sẽ ko cài file msix được nên chúng ta cần làm các bước sau
+
+Cài môi trường, chạy lệnh sau dưới powershell:
+Add-AppxPackage ‘https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx’
+
+nếu có lỗi thì tải file bên dưới và thay vào đường dẫn
+
+(https://learn.microsoft.com/en-gb/troubleshoot/developer/visualstudio/cpp/libraries/c-runtime-packages-desktop-bridge#how-to-install-and-update-desktop-framework-packages)
+
+nếu ko cài thường bị lỗi sau:
+
+Deployment failed with HRESULT: 0x80073CF3
+
+“Microsoft.VCLibs.140.00.UWPDesktop
+
+2. Cài file msix của bạn
+
+Add-AppxPackage -Path “yourpath_file.msix”
+
+cũng có thể cài trực tiếp url file msix, ví dụ Tradingview
+
+Add-AppxPackage -Path “https://tvd-packages.tradingview.com/stable/latest/win32/TradingView.msix“
+
+ 
+
+ps: dành cho ai cài Tradingview thì chạy 2 lệnh sau cho thuận tiện
+
+Add-AppxPackage ‘https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx’
+
+Add-AppxPackage -Path “https://tvd-packages.tradingview.com/stable/latest/win32/TradingView.msix“
+

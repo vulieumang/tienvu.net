@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combining String Literals And Variables In PHP - TienVu.net</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="liquid-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="glass-overlay"></div>
+    </div>
+
+    <header class="glass-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">TienVu.net</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Trang chủ</a></li>
+                    <li><a href="../../index.html" class="active">Blog</a></li>
+                    <li><a href="../../dich-vu.html">Dịch vụ</a></li>
+                    <li><a href="../../index.html#contact">Liên hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="blog-detail-section">
+            <div class="container">
+                <article class="glass-panel blog-content">
+                    <a href="../../index.html" class="read-more" style="margin-bottom: 1rem; display: inline-flex;"><i
+                            class="fas fa-arrow-left"></i> Quay lại Trang chủ</a>
+                    <h1>Combining String Literals And Variables In PHP</h1>
+                    <span class="blog-meta"><i class="far fa-calendar-alt"></i> 15/12/2025 | <i class="fas fa-tag"></i>
+                        Lập trình PHP</span>
+
+                    <div class="blog-body">
+                        <p>Trong PHP, chúng ta có nhiều cách để kết hợp chuỗi và biến. Bài viết này sẽ phân tích các
+                            phương pháp và đề xuất cách tốt nhất (Heredoc).</p>
+
+                        <div class="highlight-box">
+                            <i class="fas fa-link"></i> Bài viết gốc: <a
+                                href="https://www.droptica.com/blog/combining-string-literals-and-variables-php/"
+                                target="_blank">Droptica Blog</a>
+                        </div>
+
+                        <h2>Heredoc - Giải pháp tối ưu</h2>
+                        <p>Mình đưa ra phương án mà mình thấy tốt nhất là <strong>heredoc</strong>. Bạn có thể thực hiện
+                            code PHP trong dấu <code>{}</code> bên trong heredoc.</p>
+
+                        <pre><code class="language-php">&lt;?php
+$image = $value['item']['image'];
+$image_mobile = $value['item']['image_mobile'];
+
+echo &lt;&lt;&lt;TEXT
+&lt;div class="slider-item"&gt;
+    &lt;div class="item-image"&gt;
+        &lt;img class="md" src="$image" alt=""&gt;
+        &lt;img class="sm" src="{$about['title']}" alt=""&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+TEXT;
+?&gt;</code></pre>
+
+                        <h2>Các phương pháp phổ biến</h2>
+                        <ol>
+                            <li><strong>Single quotes with concatenation</strong>: <code>'Variable is ' . $var;</code>
+                            </li>
+                            <li><strong>Double quotes</strong>: <code>"Variable is {$var}";</code></li>
+                            <li><strong>Sprintf</strong>: <code>sprintf('Variable is %s', $var);</code></li>
+                            <li><strong>Heredoc</strong> (như ví dụ trên).</li>
+                        </ol>
+
+                        <h2>Tại sao chọn Heredoc?</h2>
+                        <p>Heredoc giúp code dễ đọc hơn, tránh việc phải escape dấu ngoặc kép (quote) nhiều lần và cho
+                            phép viết HTML block một cách tự nhiên.</p>
+
+                        <p>So sánh:</p>
+                        <p><strong>Concatenation (Khó đọc):</strong></p>
+                        <pre><code>$str = '&lt;div class="container"&gt;&lt;p style="font-size:' . $size . 'px;"&gt;' . $text . '&lt;/p&gt;&lt;/div&gt;';</code></pre>
+
+                        <p><strong>Heredoc (Dễ đọc):</strong></p>
+                        <pre><code>$str = &lt;&lt;&lt;STR
+&lt;div class="container"&gt;
+    &lt;p style="font-size:{$size}px;"&gt;$text&lt;/p&gt;
+&lt;/div&gt;
+STR;</code></pre>
+
+                        <h2>Kết luận</h2>
+                        <p>Sử dụng Heredoc hoặc Double quotes cho các trường hợp đơn giản. Tránh Concatenation quá nhiều
+                            vì sẽ gây rối mắt (maintenance nightmare). Sprintf mạnh mẽ nhưng xử lý chậm hơn một chút.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="glass-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="contact-info">
+                    <h3>Đinh Tiến Vũ</h3>
+                    <p>Web Developer & Designer</p>
+                    <div class="social-links">
+                        <a href="https://zalo.me/0906386941" target="_blank" class="social-icon"><i
+                                class="fas fa-comment"></i></a>
+                        <a href="https://t.me/tamydung" target="_blank" class="social-icon"><i
+                                class="fab fa-telegram-plane"></i></a>
+                        <a href="tel:0906386941" class="social-icon"><i class="fas fa-phone-alt"></i></a>
+                    </div>
+                </div>
+                <div class="copyright">&copy; 2024 TienVu.net. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+    <script src="../../assets/js/blog.js"></script>
+</body>
+
+</html>

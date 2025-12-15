@@ -1,0 +1,206 @@
+Kết hợp các chữ viết chuỗi và các biến trong PHP, echo HTML string in PHP
+
+bài viết dịch từ
+
+Combining String Literals And Variables In PHP
+
+https://www.droptica.com/blog/combining-string-literals-and-variables-php/
+
+Mình đưa ra phương án mà mình thấy tốt nhất là heredoc
+
+có thể thực hiện code php trong đâu {} bên trong heredoc
+<?php
+$image = $value[‘item’][‘image’];
+$image_mobile = $value[‘item’][‘image_mobile’];
+echo
+<<<TEXT
+<div class=”slider-item”>
+<div class=”item-image”>
+<img class=”md” src=”$image” alt=””>
+<img class=”sm” src=”{$about[“title”]}” alt=””>
+</div>
+</div>
+TEXT;
+?>
+
+ 
+
+==
+
+In PHP we have several options for specifying strings, but most of us are only familiar with defining string literals using quotes. Sometimes, these strings are simple and we can use them as-is, but more often than not we need them to be dynamic, combined with different variables.
+
+It’s important to have a good understanding of how you can combine string literals with any variable.
+
+The most common approaches to adapt a string are to use:
+
+Single quotes with concatenation,
+Double quotes with in-string variable,
+sprintf (vsprintf) function,
+heredoc (newdoc) syntax.
+We’re going to focus on each option, its strong and weak points. First, let’s dive into the theory.
+
+Theory
+#1 Single quotes with concatenation
+A single-quoted string does not have variables within it interpreted. Unlike the other options, variables in a single-quoted string won’t be expanded when they occur. That means you need to use concatenation.
+
+'Variable is' . $var; 
+#2 Double quotes and in-string variable
+With double quotes, the PHP compiler will expand every escaped variable inside a string literal.
+
+"Variable is {$var}"; 
+#3 Sprintf (vsprintf) function
+Sprintf is the most powerful and advanced PHP string formatting function, giving you so many options to control the final result. It lets you format strings according to a special templating language and seems to be a much more powerful way to insert variables into them, with the biggest processing time cost though.
+
+The sprintf function takes the string template as its first argument. Following that, there can be an indefinite amount of arguments. Sprintf will replace placeholders inside a string according to the arguments that you passed to the function.
+
+sprintf('Variable is %s', $var); 
+#4 Heredoc (and nowdoc)
+A Here Document is defined as a section of a source code file that is treated as if it were a separate file.
+
+Improved syntax (since PHP 7.3), makes us using heredoc in a more readable, much cleaner and less error-prone way. Heredoc lets you do something that’s harder to do with a quoted string literal. It lets you define a block of text as literal.
+
+By default, PHP will process a heredoc like it would a double-quoted string literal, while nowdoc – a single quoted string. To use a nowdoc we just need to enclose the opening identifier in single quotes.
+
+Heredoc syntax:
+
+$str = <<<STR
+Variable is $var
+STR;
+Newdoc syntax:
+
+$str = <<<'STR'
+Variable is $var
+STR;
+Practice
+Let’s test each approach with a few examples.
+
+Consider the following text:
+
+Knock knock, "LANG" has you. Wake up NAME, ACTION
+#1 Concat 
+
+$str = 'Knock knock, "' . $lang . '" has you. Wake up ' . $name . ', ' . $action;
+We have to deal with a huge number of quotes, concatenation and extra spaces here.
+
+#2 In-string variable
+
+$str = "Knock knock, \"{$lang}\" has you. Wake up {$name}, {$action}";
+Looks much better, just remember to escape variables, and special characters (“ in this case).
+
+#3 Sprintf
+
+$str = sprintf('Knock knock, "%s" has you. Wake up %s, %s', $lang, $name, $action);
+Looks also pretty readable, with no escaping.
+
+Alternatively, we can pass the variables as an array.
+
+$vars = [
+ 'PHP',
+ 'Developer',
+ 'time to code'
+];
+$str = sprintf('Knock knock, "%s" has you. Wake up %s, %s', ...$vars);
+Same if we use the vsprintf function.
+
+$str = vsprintf('Knock knock, "%s" has you. Wake up %s, %s', $vars);
+#4 Heredoc
+
+$str = <<<STR
+Knock knock, "$lang" has you. Wake up $name, $action
+STR;
+No escaping, no concatenations or extra quotes, no need to call functions, but 3 lines for a simple string.
+
+Let’s say we want to add some markup with dynamic variables:
+
+<div class="container">
+ <p style="font-size:SIZEpx;line-height:SIZEpx;">
+   <span class="first-item" style="color:red">TEXT1</span>
+   <span class="last-item" style="color:black">TEXT2/span>
+ </p>
+</div>
+We would recommend using heredoc here:
+
+<<<TEXT
+<div class="container">
+ <p style="font-size:{$size}px;line-height:{$size}px;">
+   <span class="first-item" style="color:red">$text1</span>
+   <span class="last-item" style="color:black">$text2</span>
+ </p>
+</div>
+TEXT;
+In-string looks similar, but we need a bit more escape characters ‘\’ and {}.
+
+"<div class=\"container\">
+ <p style=\"font-size:{$size}px;line-height:{$size}px;\">
+   <span class=\"first-item\" style=\"color:red\">{$text1}</span>
+   <span class=\"last-item\"  style=\"color:black\">{$text2}</span>
+ </p>
+</div>";
+Concating looks less readable, but thanks to formatting it is not annoying. But that’s not the main problem here:
+
+'<div class="container">
+<p style="font-size:' . $size . 'px;line-height:' . $size . 'px;">
+<span class="first-item" style="color:red">' . $text1 . '</span>
+<span class="last-item"  style="color:black">' . $text2 . '</span>
+</p></div>';
+Imagine we want to add a new dynamic variable to <p> tag, in heredoc syntax:
+
+display: $display;
+or in double quoted:
+
+display: {$display};
+While for a single quoted case we need to find the right place before adding more concatenations and quotes. It is very easy to make a mistake:
+
+display:' . $display . ';">' . '
+And what’s about sprintf:
+
+sprintf('<div class="container">
+<p style="font-size:%spx;line-height:%spx;">
+  <span class="first-item" style="color:red">%s</span>
+  <span class="last-item" style="color:black">%s</span>
+</p>
+</div>', $size, $size, $text1, $text2);
+Passing a multi-line string doesn’t look great, unless you want to assign it to some variable first.
+
+Also, remember to keep the number of variable placeholders low. Otherwise, you will have a maintenance nightmare with 10+ parameters, trying to add new %s, finding the position in the parameter list and add it to the sprintf call.
+
+In the above example, if we want to add a new variable
+
+display: %s;
+right after the line-height we need to figure out that it is the third parameter and list it as an argument between $size and $text1. Doesn’t sound cool.
+In this case you can try playing with ordered placeholders like %1$s, %2$s, additionally that placeholders can be repeated without adding more arguments in the code.
+
+sprintf('<div class="container">
+<p style="font-size:%1$spx;line-height:%1$spx;display:%4$s">
+  <span class="first-item" style="color:red">%2$s</span>
+  <span class="last-item" style="color:black">%3$s</span>
+</p>
+</div>', $size, $text1, $text2, $display);
+Performance comparison
+The initial setup for our test:
+
+PHP 7.3
+Number of iterations – 5.000.000
+The simple case is Knock knock, $lang has you.
+The complicated is Knock knock, “$lang” has you. Wake up $name, $action
+The results:
+
+SINGLE QUOTE	DOUBLE QUOTE	SPRINTF	SPRINTF (ALT)	HEREDOC
+simple case, ms	275	259	533	572	260
+complicated case, ms	685	479	935	888	487
+string and variables chart
+
+MYTH: Using “ is faster than ‘. PHP will not use additional processing to interpret what is inside the single quote, while inside double quotes PHP has to parse and check if there are any variables.
+
+Today, the argument that one performs better than the other doesn’t hold any water, unless you start combining the string with variables, then the double-quotes method is definitely a winner here.
+
+Summary
+We find an in-string option the most usable method for combining the strings and variables. But general advice is to use each method for a certain scenario.
+
+Here are the recommendations for each approach:
+
+Use single quotes by default unless you need to use variables within the string. Otherwise, you will get the maintenance mess, increasing with the complexity of strings, because you have to deal with a huge number of quotes, concatenation and extra spaces. The same happens with performance, the string with more concatenations is less efficient against the #2 and #3.
+Double quoted strings are more elegant because you don’t have to break up your string every time you need to insert a variable (like you must do with single quoted strings). As a result, it is easier to both write and read such strings. Also, it is one of the fastest approaches, especially in hard scenarios.
+Heredoc acts like a double quoted string, which might be also the option for you. Both heredoc and nowdoc syntaxes are very useful when we want to define a multiline string. Performance is equal to #2.
+The most flexible and powerful option is sprintf, but also the slowest one. You can use it, but for shorter strings, as it becomes pretty hard to use this solution after 4-5 variables. Remember, that you can do much more than just inserting variable values in strings, for example, specify number format (hex, decimal, octal), number of decimals, padding and many more.
+At Droptica, we have been providing PHP development services for over 10 years. This text is the result of experience gained. So if you have a project that requires expert PHP knowledge, feel free to contact us.

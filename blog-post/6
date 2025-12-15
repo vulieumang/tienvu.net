@@ -1,0 +1,9 @@
+Fix cURL error 60: SSL certificate
+
+Appearance > Theme Editor > functions.php or or edit your functions.php file
+
+add_filter('https_ssl_verify', '__return_false');
+
+and it works
+
+https://stackoverflow.com/questions/29822686/curl-error-60-ssl-certificate-unable-to-get-local-issuer-certificate

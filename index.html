@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ - TienVu.net</title>
+    <meta name="description" content="TienVu.net - Portfolio và Blog cá nhân của Đinh Tiến Vũ.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/blog.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Homepage specific styles if needed, otherwise reusing blog.css */
+        .hero-section {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Setup Background Elements -->
+    <div class="liquid-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="glass-overlay"></div>
+    </div>
+
+    <header class="glass-header">
+        <div class="container">
+            <a href="index.html" class="logo">TienVu.net</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Trang chủ</a></li>
+                    <!-- Blog link removed as Home is now Blog -->
+                    <li><a href="dich-vu.html">Dịch vụ</a></li>
+                    <li><a href="#contact">Liên hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="featured-posts" class="featured-posts" style="padding-top: 120px;">
+            <div class="container">
+                <h2 class="section-title text-center" style="margin-bottom: 2rem; color: #fff;">Bài viết mới nhất</h2>
+                <div class="post-grid">
+                    <!-- Post New: Adobe 2020 Repack -->
+                    <article class="glass-card tilt-card" onclick="window.location.href='blog/adobe-2020-repack/'"
+                        data-tilt>
+                        <div class="card-content">
+                            <span class="tag">Phần mềm</span>
+                            <h3>Ad0be Ph0t0sh0p + AI 2O2O R3p4ck</h3>
+                            <p>Link tải nhanh bản Repack ổn định, không cần cài Cloud. Dành cho anh em design.</p>
+                            <a href="blog/adobe-2020-repack/" class="read-more">Tải ngay <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="card-glow"></div>
+                    </article>
+                    <!-- Post New: Thanh Cong May Man -->
+                    <article class="glass-card tilt-card" onclick="window.location.href='blog/thanh-cong-may-man/'"
+                        data-tilt>
+                        <div class="card-content">
+                            <span class="tag">Suy ngẫm</span>
+                            <h3>Thành công đôi khi nhờ may mắn và duyên phận</h3>
+                            <p>Câu chuyện đầy cảm hứng về một người tay ngang xây dựng đế chế website triệu đô.</p>
+                            <a href="blog/thanh-cong-may-man/" class="read-more">Đọc tiếp <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="card-glow"></div>
+                    </article>
+                    <!-- Post 1: Gmail App Password -->
+                    <article class="glass-card tilt-card" onclick="window.location.href='blog/gmail-app-password/'"
+                        data-tilt>
+                        <div class="card-content">
+                            <span class="tag">Thủ thuật</span>
+                            <h3>Lấy mật khẩu ứng dụng Gmail</h3>
+                            <p>Cách lấy mật khẩu ứng dụng để cấu hình gửi email SMTP an toàn.</p>
+                            <a href="blog/gmail-app-password/" class="read-more">Đọc tiếp <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="card-glow"></div>
+                    </article>
+
+                    <!-- Post 2: Bad Javascript -->
+                    <article class="glass-card tilt-card" onclick="window.location.href='blog/bad-javascript/'"
+                        data-tilt>
+                        <div class="card-content">
+                            <span class="tag">Lập trình</span>
+                            <h3>Bye Bye Bad Javascript</h3>
+                            <p>Loại bỏ thói quen xấu khi code JS để trở thành lập trình viên giỏi hơn.</p>
+                            <a href="blog/bad-javascript/" class="read-more">Đọc tiếp <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="card-glow"></div>
+                    </article>
+
+                    <!-- Post 3: 5 Thoi Quen -->
+                    <article class="glass-card tilt-card" onclick="window.location.href='blog/5-thoi-quen/'" data-tilt>
+                        <div class="card-content">
+                            <span class="tag">Kỹ năng sống</span>
+                            <h3>5 thói quen làm việc hiệu quả</h3>
+                            <p>Chia sẻ từ TS. Alan Phan về cách tối ưu hóa hiệu suất làm việc.</p>
+                            <a href="blog/5-thoi-quen/" class="read-more">Đọc tiếp <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="card-glow"></div>
+                    </article>
+
+                    <!-- Post 4: MacOS Password -->
+                    <article class="glass-card tilt-card" onclick="window.location.href='blog/macos-short-password/'"
+                        data-tilt>
+                        <div class="card-content">
+                            <span class="tag">MacOS Tips</span>
+                            <h3>Đặt mật khẩu ngắn trên MacOS</h3>
+                            <p>Cách bypass yêu cầu policy để đặt password 1 ký tự cho máy Mac.</p>
+                            <a href="blog/macos-short-password/" class="read-more">Đọc tiếp <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="card-glow"></div>
+                    </article>
+
+                    <!-- Post 5: PHP Strings -->
+                    <article class="glass-card tilt-card" onclick="window.location.href='blog/php-string-literals/'"
+                        data-tilt>
+                        <div class="card-content">
+                            <span class="tag">PHP Dev</span>
+                            <h3>PHP String Literals & Variables</h3>
+                            <p>Tại sao Heredoc là phương án tốt nhất để kết hợp chuỗi và biến trong PHP.</p>
+                            <a href="blog/php-string-literals/" class="read-more">Đọc tiếp <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="card-glow"></div>
+                    </article>
+
+                    <!-- Post 6: cURL Error 60 -->
+                    <article class="glass-card tilt-card" onclick="window.location.href='blog/curl-error-60/'"
+                        data-tilt>
+                        <div class="card-content">
+                            <span class="tag">WordPress</span>
+                            <h3>Fix lỗi cURL error 60 SSL</h3>
+                            <p>Khắc phục nhanh lỗi SSL certificate khi chạy WordPress trên Localhost.</p>
+                            <a href="blog/curl-error-60/" class="read-more">Đọc tiếp <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="card-glow"></div>
+                    </article>
+
+                    <!-- Post 7: Install MSIX -->
+                    <article class="glass-card tilt-card" onclick="window.location.href='blog/install-msix/'" data-tilt>
+                        <div class="card-content">
+                            <span class="tag">Windows</span>
+                            <h3>Cài file .msix trên Windows LTSC</h3>
+                            <p>Hướng dẫn cài đặt file Appx/Msix khi máy không có Windows Store.</p>
+                            <a href="blog/install-msix/" class="read-more">Đọc tiếp <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="card-glow"></div>
+                    </article>
+
+                    <!-- Post 8: Copy GDrive -->
+                    <article class="glass-card tilt-card" onclick="window.location.href='blog/copy-gdrive/'" data-tilt>
+                        <div class="card-content">
+                            <span class="tag">Thủ thuật</span>
+                            <h3>Copy file Google Drive khác</h3>
+                            <p>Mẹo copy file từ Drive người khác về Drive mình không cần tải về.</p>
+                            <a href="blog/copy-gdrive/" class="read-more">Đọc tiếp <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="card-glow"></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="glass-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="contact-info">
+                    <h3>Đinh Tiến Vũ</h3>
+                    <p>Web Developer & Designer</p>
+                    <div class="social-links">
+                        <a href="https://zalo.me/0986595475" target="_blank" class="social-icon" title="Zalo"><i
+                                class="fas fa-comment"></i></a>
+                        <a href="https://t.me/dinhtienvu" target="_blank" class="social-icon" title="Telegram"><i
+                                class="fab fa-telegram-plane"></i></a>
+                        <a href="tel:0986595475" class="social-icon" title="Phone"><i class="fas fa-phone-alt"></i></a>
+                    </div>
+                </div>
+                <div class="copyright">
+                    &copy; 2024 TienVu.net. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Vanilla Tilt JS for card animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script src="assets/js/blog.js"></script>
+</body>
+
+</html>
