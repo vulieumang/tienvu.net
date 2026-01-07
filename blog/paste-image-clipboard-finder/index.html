@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paste Hình Ảnh Từ Clipboard Vào Finder macOS - TienVu.net</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="liquid-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="glass-overlay"></div>
+    </div>
+
+    <header class="glass-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">TienVu.net</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Trang chủ</a></li>
+                    <li><a href="../../dich-vu.html">Dịch vụ</a></li>
+                    <li><a href="../../index.html#contact">Liên hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="blog-detail-section">
+            <div class="container">
+                <article class="glass-panel blog-content">
+                    <a href="../../index.html" class="read-more" style="margin-bottom: 1rem; display: inline-flex;"><i
+                            class="fas fa-arrow-left"></i> Quay lại Trang chủ</a>
+                    <h1>Hướng Dẫn Paste Hình Ảnh Từ Clipboard Trực Tiếp Vào Folder Finder Trên macOS (Intel Mac)</h1>
+                    <span class="blog-meta"><i class="far fa-calendar-alt"></i> 03/01/2026 | <i class="fas fa-tag"></i>
+                        MacOS Tips</span>
+
+                    <div class="blog-body">
+                        <p><strong>Mục tiêu</strong>: Sau khi copy hình ảnh từ web (chuột phải → Copy Image), bạn chỉ
+                            cần mở Finder đến thư mục mong muốn và nhấn một phím tắt → hình ảnh tự động lưu thành file
+                            ngay trong thư mục đó, <strong>không cần Preview, không dialog Save, không chọn vị
+                                trí</strong>.</p>
+
+                        <div class="info-box">
+                            <p><strong>Yêu cầu</strong>:</p>
+                            <ul>
+                                <li>Mac Intel (không phải Apple Silicon M1/M2/M3/M4)</li>
+                                <li>macOS Ventura trở lên (đã test tốt trên Sonoma & Sequoia)</li>
+                                <li>Homebrew + pngpaste (chỉ cài 1 lần)</li>
+                            </ul>
+                        </div>
+
+                        <h2>Bước 1: Cài Homebrew và pngpaste (chỉ làm 1 lần)</h2>
+                        <ol>
+                            <li>Mở <strong>Terminal</strong> (Spotlight → gõ Terminal).</li>
+                            <li>Cài Homebrew (nếu chưa có):
+                                <pre><code class="language-bash">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre>
+                                <p>→ Nhập mật khẩu Mac khi yêu cầu, chờ 1-3 phút.</p>
+                            </li>
+                            <li>Cài pngpaste:
+                                <pre><code class="language-bash">brew install pngpaste</code></pre>
+                            </li>
+                            <li>Kiểm tra path (phải trả về <code>/usr/local/bin/pngpaste</code>):
+                                <pre><code class="language-bash">which pngpaste</code></pre>
+                            </li>
+                        </ol>
+
+                        <h2>Bước 2: Tạo Quick Action trong Automator</h2>
+                        <ol>
+                            <li>Mở <strong>Automator</strong> (Spotlight → Automator).</li>
+                            <li>Chọn <strong>New Document</strong> → <strong>Quick Action</strong> →
+                                <strong>Choose</strong>.
+                            </li>
+                            <li>Cài đặt phía trên:
+                                <ul>
+                                    <li>Workflow receives: <strong>no input</strong></li>
+                                    <li>in: <strong>Finder.app</strong></li>
+                                </ul>
+                            </li>
+                            <li>Bên trái tìm <strong>Run Shell Script</strong> → kéo sang bên phải.</li>
+                            <li>Cài đặt Run Shell Script:
+                                <ul>
+                                    <li>Shell: <strong>/bin/zsh</strong></li>
+                                    <li>Pass input: <strong>as arguments</strong></li>
+                                </ul>
+                            </li>
+                            <li>Xóa hết nội dung mặc định, paste đoạn script sau:
+                                <pre><code class="language-zsh"># Tạo tên file theo thời gian để tránh trùng
+formattedDate=$(date +'%Y-%m-%d_%H-%M-%S')
+
+# Lấy thư mục hiện tại của Finder (nếu không có cửa sổ mở → dùng Desktop)
+if [ $(osascript -e 'tell application "Finder" to count windows') -gt 0 ]; then
+ currentFolder=$(osascript -e 'tell application "Finder" to POSIX path of (insertion location as alias)')
+else
+ currentFolder="$HOME/Desktop/"
+fi
+
+# Đường dẫn file đầy đủ
+filePath="${currentFolder}${formattedDate}.png"
+
+# Lưu hình từ clipboard, nếu thất bại thì paste bình thường (text/file)
+if /usr/local/bin/pngpaste "$filePath" 2>/dev/null; then
+ :
+else
+ osascript -e 'tell application "System Events" to keystroke "v" using command down'
+fi</code></pre>
+                            </li>
+                            <li>File → Save → Đặt tên: <strong>Paste Clipboard Image</strong> (hoặc tên dễ nhớ).</li>
+                        </ol>
+
+                        <div class="blog-image">
+                            <img src="automator-setup.jpg" alt="Automator Quick Action Setup" class="rounded-img">
+                            <p class="image-caption">Cấu hình Run Shell Script trong Automator</p>
+                        </div>
+
+                        <h2>Bước 3: Gán phím tắt</h2>
+                        <ol>
+                            <li>Vào <strong>System Settings</strong> → <strong>Keyboard</strong> → <strong>Keyboard
+                                    Shortcuts…</strong></li>
+                            <li>Bên trái chọn <strong>Services</strong> (hoặc App Shortcuts ở phiên bản cũ).</li>
+                            <li>Cuộn xuống phần <strong>General</strong> → tìm <strong>Paste Clipboard Image</strong>
+                                (tên bạn vừa đặt).</li>
+                            <li>Click vào → gán phím tắt, gợi ý:
+                                <ul>
+                                    <li><strong>⌘ + Shift + V</strong> (phổ biến nhất)</li>
+                                    <li>hoặc <strong>Control + ⌘ + V</strong></li>
+                                    <li>hoặc <strong>Option + ⌘ + V</strong></li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <div class="blog-image">
+                            <img src="keyboard-shortcut.jpg" alt="Keyboard Shortcut Setup" class="rounded-img">
+                            <p class="image-caption">Gán phím tắt cho Quick Action</p>
+                        </div>
+
+                        <h2>Cách sử dụng hàng ngày (siêu nhanh)</h2>
+                        <ol>
+                            <li>Trên trình duyệt: chuột phải vào hình → <strong>Copy Image</strong> (hoặc Copy).</li>
+                            <li>Mở <strong>Finder</strong> → đi đến thư mục muốn lưu (Desktop, Downloads, Pictures…).
+                            </li>
+                            <li>Nhấn phím tắt bạn đã gán (ví dụ <strong>⌘ + Shift + V</strong>).</li>
+                            <li>→ File PNG xuất hiện ngay lập tức trong thư mục, tên kiểu
+                                <code>2026-01-03_15-30-45.png</code>.
+                            </li>
+                        </ol>
+
+                        <div class="tip-box">
+                            <h3>Tùy chọn: Lưu thành JPG thay vì PNG (file nhỏ hơn)</h3>
+                            <p>Nếu muốn file JPG, thay toàn bộ script ở Bước 2 bằng đoạn này:</p>
+                            <pre><code class="language-zsh">formattedDate=$(date +'%Y-%m-%d_%H-%M-%S')
+
+if [ $(osascript -e 'tell application "Finder" to count windows') -gt 0 ]; then
+    currentFolder=$(osascript -e 'tell application "Finder" to POSIX path of (insertion location as alias)')
+else
+    currentFolder="$HOME/Desktop/"
+fi
+
+pngPath="${currentFolder}${formattedDate}.png"
+jpgPath="${currentFolder}${formattedDate}.jpg"
+
+/usr/local/bin/pngpaste "$pngPath" 2>/dev/null && \
+sips -s format jpeg "$pngPath" --out "$jpgPath" && \
+rm "$pngPath" || \
+osascript -e 'tell application "System Events" to keystroke "v" using command down'</code></pre>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="glass-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="contact-info">
+                    <h3>Đinh Tiến Vũ</h3>
+                    <p>Web Developer & Designer</p>
+                    <div class="social-links">
+                        <a href="https://zalo.me/0986595475" target="_blank" class="social-icon" title="Zalo"><i
+                                class="fas fa-comment"></i></a>
+                        <a href="https://t.me/dinhtienvu" target="_blank" class="social-icon" title="Telegram"><i
+                                class="fab fa-telegram-plane"></i></a>
+                        <a href="tel:0986595475" class="social-icon" title="Phone"><i class="fas fa-phone-alt"></i></a>
+                    </div>
+                </div>
+                <div class="copyright">&copy; 2026 TienVu.net. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+    <script src="../../assets/js/blog.js"></script>
+</body>
+
+</html>
